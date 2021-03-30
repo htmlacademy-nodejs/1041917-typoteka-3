@@ -1,8 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Anton Volyk](https://up.htmlacademy.ru/nodejs/3/user/1041917).
-* Наставник: `Неизвестно`.
-
+* Наставник: [Дмитрий Мирошниченко](https://htmlacademy.ru/profile/id591417).
 ---
 
 _Не удаляйте и не изменяйте папки и файлы:_
