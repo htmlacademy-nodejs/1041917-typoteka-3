@@ -1,11 +1,12 @@
 `use strict`;
 const fs = require('fs');
+const { ExitCode } = require('../../constants');
 const { getRandomInt } = require(`../../utils`);
 
 const DEFAULT_COUNT = 1;
-const MAX_COUNT = {
-  value: 1000,
-  message: `Не больше 1000 публикаций`
+const MaxCount = {
+  VALUE: 1000,
+  MESSAGE: `Не больше 1000 публикаций`
 };
 const FILE_NAME = `mocks.json`;
 
@@ -66,8 +67,8 @@ const generateArticles = (count) => (
       title: TITLES[getRandomInt(0, TITLES.length - 1)],
       createdDate: new Date().toISOString(),
       announce: SENTENCES.slice(getRandomInt(0, 5), 5),
-      fullText: SENTENCES.slice(0, getRandomInt(0, SENTENCES.length - 1)),
-      сategory: CATEGORIES.slice(0, getRandomInt(0, CATEGORIES.length - 1))
+      fullText: SENTENCES.slice(1, getRandomInt(0, SENTENCES.length - 1)),
+      сategory: CATEGORIES.slice(1, getRandomInt(0, CATEGORIES.length - 1))
     }))
 );
 
@@ -76,8 +77,8 @@ module.exports = {
   run(args) {
     const [count] = args;
 
-    if (count > MAX_COUNT.value) {
-      return console.error(MAX_COUNT.message);
+    if (count > MaxCount.VALUE) {
+      return console.log(MaxCount.MESSAGE);
     }
 
     const countOffer = Number.parseInt(count, 10) || DEFAULT_COUNT;
@@ -85,10 +86,12 @@ module.exports = {
 
     fs.writeFile(FILE_NAME, content, (err) => {
       if (err) {
-        return 1;
+        console.error(`Can't write data to file...`);
+        process.exit(ExitCode.ERROR);
       }
 
-      return 0;
+      console.info(`Operation success. File created.`);
+      process.exit(ExtiCode.SUCCESS);
     });
   }
 };
