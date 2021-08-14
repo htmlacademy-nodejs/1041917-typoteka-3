@@ -1,25 +1,36 @@
 'use strict';
 
-const chalk = require('chalk');
-const http = require('http');
-const fs = require('fs').promises;
-const {HttpCode} = require('../../constants');
+const chalk = require(`chalk`);
+const express = require(`express`);
+const app = express();
+const {Router} = require(`express`);
+const router = new Router();
+const fs = require(`fs`).promises;
+const {HttpCode} = require(`../../constants`);
 
 const DEFAULT_PORT = 3000;
-const FILE_NAME = 'mocks.json';
+const FILE_NAME = `mocks.json`;
 
 module.exports = {
-  name: '--server',
+  name: `--server`,
   run(args) {
     const [customPort] = args;
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
 
-    http.createServer(onClientConnect)
-      .listen(port)
-      .on('listening', () => {
-        console.info(chalk.green(`Server listening on port ${port}`));
-      })
-      .on('error', (error) => console.error(chalk.red(error)))
+    router.get('/post', async (req, res) => {
+      const content = await fs.readFile(FILE_NAME);
+      const data = JSON.parse(content);
+
+      res.send( data || []);
+    })
+
+    app.use(express.json());
+    app.use(router);
+    app.use(err => console.error(chalk.red(err)));
+
+    app.listen(port,  () => {
+      console.info(chalk.green(`Server listening on port ${port}`));
+    });
   }
 }
 
@@ -41,14 +52,14 @@ const sendResponse = (respose, statusCode, message) => {
 };
 
 const onClientConnect = async (req, res) => {
-  const notFoundErrorMessage = 'Not Found';
+  const notFoundErrorMessage = `Not Found`;
 
   switch (req.url) {
-    case '/':
+    case `/`:
       try {
         const content = await fs.readFile(FILE_NAME);
         const data = JSON.parse(content);
-        const titles = data.map(line => `<li>${line.title}</li>`).join('');
+        const titles = data.map(line => `<li>${line.title}</li>`).join(``);
         sendResponse(res, HttpCode.OK, `<ul>${titles}</ul>`);
       } catch (err) {
         sendResponse(res, HttpCode.NOT_FOUND, notFoundErrorMessage);
