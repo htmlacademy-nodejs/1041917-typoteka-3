@@ -1,0 +1,30 @@
+extends includes/main-page.pug
+
+block bodyClasses
+  - var bodyClasses = 'wrapper wrapper--nobackground'
+
+block header
+  include includes/admin-header-section.pug
+
+block mainClasses
+  - var mainClasses = 'main-page main-page--padding'
+
+block main
+  section.main-page__category.category
+    h1.category__title Категории
+    .category__add-form
+      form(action='#' method='POST')
+        input#add-form-add-category(type='text' name='add-category' placeholder='Новая категория')
+        label(for='add-form-add-category')
+          span.visually-hidden Добавить категорию
+        button.category__button.button.button--category(type='submit') Добавить
+    ul.category__list
+      - var categories = { 1: 'Жизнь и путешествия', 2: 'Путешествия', 3: 'Дизайн и программирование', 4: 'Другое', 5: 'Личное'}
+      each val, key in categories
+        li.category__list-item
+          form(action='#' method='POST')
+            input(id='modify-form-category-' + key type='text' name='category-' + key value=val)
+            label(for='modify-form-category-' + key)
+              span.visually-hidden Редактировать категорию
+            button.category__button.button.button--category(type='submit') Сохранить
+            button.category__button.button.button--category(type='button') Удалить

@@ -1,8 +1,9 @@
-`use strict`;
-const fs = require('fs').promises;
-const chalk = require('chalk');
-const { ExitCode }  = require('../../constants');
-const { getRandomInt } = require(`../../utils`);
+'use strict';
+
+const fs = require(`fs`).promises;
+const chalk = require(`chalk`);
+const {ExitCode}  = require(`../../constants`);
+const {getRandomInt} = require(`../../utils`);
 
 const DEFAULT_COUNT = 1;
 const MaxCount = {
@@ -18,7 +19,7 @@ const FILE_CATEGORIES_PATH = `./data/categories.txt`;
 const readFileContent = async (path) => {
   try {
     const content = await fs.readFile(path,`utf8`);
-    return content.split('\n');
+    return content.split(`\n`);
   } catch(err) {
     console.error(chalk.red(err));
     return [];

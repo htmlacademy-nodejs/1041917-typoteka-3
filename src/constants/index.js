@@ -1,3 +1,5 @@
+'use strict';
+
 const ExitCode = {
   SUCCESS: 0,
   ERROR: 1
@@ -8,5 +10,5 @@ const DEFAULT_COMMAND = `--help`;
 module.exports = {
   ExitCode,
   USER_ARGV_INDEX,
-  DEFAULT_COMMAND
-}
+  DEFAULT_COMMAND,
+};

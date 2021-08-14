@@ -1,0 +1,10 @@
+.preview__toggle-wrapper
+  ul.preview__pagination.pagination
+    li
+      a.pagination__button.button.button--backwards.button--disabled(href='#' aria-label='Страница назад') Назад
+    - var pages = [1, 2, 3, 4, 5]
+    each val in pages
+      li(class='pagination__item'  class=val === 1 ? 'pagination__item--active': '')
+        a(href='#') #{val}
+    li
+      a.pagination__button.button.button--forward(href='#' aria-label='Страница вперед') Вперед
