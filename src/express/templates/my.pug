@@ -1,0 +1,23 @@
+extends includes/main-page.pug
+
+block bodyClasses
+  - var bodyClasses = 'wrapper wrapper--nobackground'
+
+block header
+  include includes/admin-header-section.pug
+
+block mainClasses
+  - var mainClasses = 'main-page main-page--padding'
+
+block main
+  section.main-page__notes.notes
+    h1.notes__title Мои записи
+    ul.notes__list
+      - var list = [1, 2, 3, 4, 5]
+      each value in list
+        - var text = value % 2 === 0 ? 'Facebook разрешит пользователям копировать фотографии из соцсети в «Google Фото»' : 'Huawei открыла в России предзаказ на смартфон Mate 30 Pro без сервисов Google'
+        li.notes__list-item
+          time.notes__item-time(datetime='2019-03-21T20:33') 21.03.2019, 20:33
+          a.notes__item-text(href='#') #{text}
+          button.notes__button.button.button--close-item(type='button')
+            span.visually-hidden Закрыть строку списка

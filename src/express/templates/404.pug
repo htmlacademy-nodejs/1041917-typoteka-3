@@ -1,0 +1,17 @@
+extends includes/main-page.pug
+
+block bodyClasses
+  - var bodyClasses = 'wrapper-color'
+
+block header
+  - var errorLinkClassName = ['header__logo', 'header__logo--404']
+  include includes/short-header.pug
+
+block mainClasses
+  - var mainClasses = 'main-page main-page--padding'
+
+block main
+    h1.visually-hidden Ошибка 404
+    section.error
+      h2.error__title.title.title--big Похоже ошиблись адресом
+      a.error__link.text.text--big(href='main.html') Вернуться на главную

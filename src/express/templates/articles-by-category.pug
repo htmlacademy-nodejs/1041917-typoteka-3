@@ -1,0 +1,15 @@
+extends includes/main-page.pug
+
+block bodyClasses
+  - var bodyClasses = 'wrapper'
+
+block header
+  include includes/short-header
+
+block mainClasses
+  - var mainClasses = 'articles-category'
+
+block main
+  h1 Бизнес
+  include includes/main-theme-list
+  include includes/main-list-preview

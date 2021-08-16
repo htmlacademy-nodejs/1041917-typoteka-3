@@ -1,0 +1,9 @@
+section.main-page__theme-list
+  h2.visually-hidden Список тем
+  ul.themes
+    - var themes = { 'Автомобили': 88, 'Удаленная работа': 13, 'Бизнес': 13, 'Путешествия': 13, 'Дизайн и обустройство': 13, 'Производство игрушек': 22, 'UX & UI': 22}
+    each val, key in themes
+      li.themes__item
+        a(class='themes__item-link' class=key === 'Дизайн и обустройство' ? 'themes__item-link--padding' : '' href='#')
+          | #{key}
+          sup #{val}

@@ -1,0 +1,24 @@
+section.main-page__list.preview
+  h2.visually-hidden Список превью статей
+  ul.preview__list
+    - var breadcrumbs = [{firstLink: 'Дизайн', secondLink: 'Удаленная работа', src: 'img/skyscraper@1x.jpg', srcset: 'img/skyscraper@1x.jpg, img/skyscraper@2x.jpg 2x', alt: 'Фотография небоскреба', nameLink: 'Я ничего не понял', previewText: 'Если вы сами пишете такие письма — почитайте Ильяхова. А в этой заметке я расскажу про заклинание, которое от таких писем помогает.'}, {firstLink: 'Фриланс', src: 'img/sea@1x.jpg', srcset: 'img/sea@1x.jpg, img/sea@2x.jpg 2x', alt: 'Фотография моря', nameLink: 'Путешествие в Голландию', previewText: 'Если вы сами пишете такие письма — почитайте Ильяхова. А в этой заметке я расскажу про заклинание, которое от таких писем помогает.'}, {firstLink: 'Фриланс', nameLink: 'Путин подписал закон о предустановке российских приложений на смартфоны и другую электронику', previewText: 'Президент России Владимир Путин подписал закон об обязательной предустановке российского программного обеспечения на электронную технику, продаваемую в России. Документ опубликован на официальном сайте правовой информации.'}, {firstLink: 'Дизайн', secondLink: 'Удаленная работа', src: 'img/forest@1x.jpg', srcset: 'img/forest@1x.jpg, img/forest@2x.jpg 2x', nameLink: 'Я понял, но не все', previewText: 'Если вы сами пишете такие письма — почитайте Ильяхова. А в этой заметке я расскажу про заклинание, которое от таких писем помогает.'}]
+    each value in breadcrumbs
+      li.preview__item
+        ul.preview__breadcrumbs
+          li.preview__breadcrumbs-item
+            a.preview__breadcrumbs-link(href='#') #{value.firstLink}
+            if value.secondLink
+              li.preview__breadcrumbs-item
+                a.preview__breadcrumbs-link(href='#') #{value.secondLink}
+        if value.src
+          .preview__background
+            img.preview__background-image(src=value.src width='460' height='240' srcset=value.srcset alt=value.alt)
+        time.preview__time(datetime='2019-03-21T20:33') 21.03.2019, 20:33
+        h3.preview__name
+          a.preview__name-link(href='#') #{value.nameLink}
+        p.preview__text #{value.previewText}
+        a.preview__comment(href='#')
+          | Комментарии
+          span.preview__cloud
+          |
+          b.preview__comment-count 12

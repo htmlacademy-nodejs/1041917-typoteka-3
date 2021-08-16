@@ -1,0 +1,10 @@
+doctype html
+html(lang='ru')
+  include head.pug
+  block bodyClasses
+  body(class=bodyClasses)
+      block header
+      block mainClasses
+      main(class=mainClasses)
+        block main
+  include footer

@@ -1,27 +1,39 @@
-const { Router } = require('express');
+'use strict';
+
+const {Router} = require(`express`);
 const router = new Router();
 
-const index = [
-  '/',
-  'register',
-  '/login',
-  '/my',
-  '/my/comments',
-  '/articles/category/:id',
-  '/articles/add',
-  '/search',
-  '/articles/edit/:id',
-  '/articles/:id',
-  '/categories '
+const routes = [
+  `main`,
+  `404`,
+  `500`,
+  `admin-add-new-post`,
+  `post`,
+  `all-categories`,
+  `comments`,
+  `my`,
+  `main`,
+  `main-empty`,
+  `main-no-comments`,
+  `main-page-admin-pager`,
+  `main-variation`,
+  `login`,
+  `sign-up`,
+  `search-1`,
+  `search-2`,
+  `search-3`,
+  `post-detail`,
+  `articles-by-category`
 ];
 
-index.forEach(mapRoute);
+registerRoutes();
 
-function mapRoute(route) {
-  router.get(route, requestHandler)
-}
-function requestHandler(req, res) {
-  res.send(req.url);
+function registerRoutes() {
+  routes.forEach(path => {
+    router.get(`/${path}`, (req, res) => {
+      res.render(`${path}`);
+    });
+  });
 }
 
 module.exports = router;

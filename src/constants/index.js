@@ -1,3 +1,5 @@
+'use strict';
+
 const ExitCode = {
   SUCCESS: 0,
   ERROR: 1
@@ -16,6 +18,5 @@ module.exports = {
   ExitCode,
   HttpCode,
   USER_ARGV_INDEX,
-  DEFAULT_COMMAND
-}
-
+  DEFAULT_COMMAND,
+};
