@@ -13,6 +13,7 @@ const FILE_NAME = `mocks.json`;
 
 module.exports = {
   name: `--server`,
+
   run(args) {
     const [customPort] = args;
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
@@ -60,6 +61,7 @@ const onClientConnect = async (req, res) => {
         const content = await fs.readFile(FILE_NAME);
         const data = JSON.parse(content);
         const titles = data.map(line => `<li>${line.title}</li>`).join(``);
+
         sendResponse(res, HttpCode.OK, `<ul>${titles}</ul>`);
       } catch (err) {
         sendResponse(res, HttpCode.NOT_FOUND, notFoundErrorMessage);
