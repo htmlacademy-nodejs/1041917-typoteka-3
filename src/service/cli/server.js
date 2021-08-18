@@ -19,15 +19,22 @@ module.exports = {
     const port = Number.parseInt(customPort, 10) || DEFAULT_PORT;
 
     router.get('/post', async (req, res) => {
-      const content = await fs.readFile(FILE_NAME);
-      const data = JSON.parse(content);
+      try {
+        const content = await fs.readFile(FILE_NAME);
+        const data = JSON.parse(content);
 
-      res.send( data || []);
+        res.json( data);
+      } catch (err) {
+        res.status(404).json({ message: err.message })
+      }
     })
 
     app.use(express.json());
     app.use(router);
-    app.use((err, req, res, next) => console.error(chalk.red(err)));
+    app.use((err, req, res, next) => {
+      console.error(chalk.red(err));
+      res.status(500).json({ message: err.message })
+    });
 
     app.listen(port,  () => {
       console.info(chalk.green(`Server listening on port ${port}`));
